@@ -4,14 +4,21 @@ import data from "../data/data.json";
 
 import BurgerMenu from "/assets/icon-hamburger.svg";
 import Arrow from "/assets/icon-chevron.svg";
-export default function Header(props: any) {
-  const [hamburgerMenu, setHamgurgerMenu] = useState<boolean>(false);
+
+interface HeaderProps {
+  isSmallScreen: boolean;
+}
+
+export default function Header(props: HeaderProps) {
+  const [hamburgerMenu, setHamburgerMenu] = useState<boolean>(false);
 
   return (
-    <header className=" flex gap-y-[1rem] justify-between items-center py-4 px-6 bg-transparent relative before:absolute  before:left-0 before:bottom-0 before:w-full before:h-px before:bg-white before:opacity-20 md:py-8 md:justify-center md:flex-col desktop:flex-row desktop:items-center desktop:py-[2.2rem] desktop:px-[3.2rem] desktop:justify-between">
-      <h1 className=" text-white font-antionio font-normal text-[2.8rem] leading-[3.6rem] tracking-[0.1rem] cursor-pointer">
-        THE PLANETS
-      </h1>
+    <header className="flex gap-y-[1rem] justify-between items-center py-4 px-6 bg-transparent relative before:absolute before:left-0 before:bottom-0 before:w-full before:h-px before:bg-white before:opacity-20 md:py-8 md:justify-center md:flex-col desktop:flex-row desktop:items-center desktop:py-[2.2rem] desktop:px-[3.2rem] desktop:justify-between">
+      <Link to="/">
+        <h1 className="text-white font-antonio font-normal text-[2.8rem] leading-[3.6rem] tracking-[0.1rem] cursor-pointer">
+          THE PLANETS
+        </h1>
+      </Link>
       {props.isSmallScreen ? (
         <img
           src={BurgerMenu}
@@ -20,7 +27,7 @@ export default function Header(props: any) {
             hamburgerMenu ? "opacity-50" : "opacity-100"
           } `}
           onClick={() => {
-            setHamgurgerMenu(!hamburgerMenu);
+            setHamburgerMenu(!hamburgerMenu);
           }}
         />
       ) : null}
@@ -30,7 +37,7 @@ export default function Header(props: any) {
           <ul className="flex gap-x-[3.3rem] desktop:mt-[-2rem]">
             {data.map((planet) => {
               return (
-                <Link to={planet.name} key={planet["planet-color"]}>
+                <Link to={planet.name} key={planet.name}>
                   <li
                     className={`text-[1.5rem] leading-[2.5rem] text-white font-spartan tracking-tight uppercase pt-[2.9rem] cursor-pointer hover:border-t-4 hover:border-solid`}
                     style={{ borderColor: planet["planet-color"] }}
@@ -56,7 +63,7 @@ export default function Header(props: any) {
                 to={planet.name}
                 key={planet.name}
                 onClick={() => {
-                  setHamgurgerMenu(false);
+                  setHamburgerMenu(false);
                 }}
               >
                 <div className="flex justify-between mx-6 py-5 items-center border-b border-white border-opacity-10">

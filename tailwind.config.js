@@ -1,7 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   mode: "jit",
-  purge: ["./public/index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
@@ -10,7 +9,7 @@ export default {
       },
 
       fontFamily: {
-        antionio: ["Antonio", "sans-serif"],
+        antonio: ["Antonio", "sans-serif"],
         spartan: ["League Spartan", "sans-serif"],
       },
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import data from "../data/data.json";
 import IPlanet from "../interfaces/Planet";
@@ -13,6 +13,10 @@ export default function Planet(props: IProps) {
   const [activeState, setActiveState] = useState<number>(0);
 
   const { planetName } = useParams();
+
+  useEffect(() => {
+    setActiveState(0);
+  }, [planetName]);
 
   const planet: IPlanet =
     data.find((planet) => planet.name === planetName) || data[2];
@@ -87,6 +91,7 @@ export default function Planet(props: IProps) {
                       : planet?.geology.source
                   }
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 text-white text-opacity-50 text-[1.2rem] leading-[2.5rem] underline"
                 >
                   Wikipedia <img src={SourceIcon} alt="Source icon" />
@@ -95,7 +100,7 @@ export default function Planet(props: IProps) {
             </div>
 
             {!props.isSmallScreen ? (
-              <div className="flex flex-col gap-4 w-[28.1rem] text-white mb-[6rem] desktop:mt-[3.9rem] desktop:">
+              <div className="flex flex-col gap-4 w-[28.1rem] text-white mb-[6rem] desktop:mt-[3.9rem]">
                 {[
                   { number: "01", name: "OVERVIEW", currentNumber: 0 },
                   {
@@ -111,7 +116,7 @@ export default function Planet(props: IProps) {
                       onClick={() => {
                         setActiveState(element.currentNumber);
                       }}
-                      className="flex gap-[1.6rem] py-[0.8rem] px-5 justify-start items-center text-[1.5rem] leading-[2.5rem] tracking-[1.9px] font-semiboldborder-white cursor-pointer desktop:w-[35rem] desktop:min-h-[4rem] font-spartan"
+                      className="flex gap-[1.6rem] py-[0.8rem] px-5 justify-start items-center text-[1.5rem] leading-[2.5rem] tracking-[1.9px] font-semibold border-white cursor-pointer desktop:w-[35rem] desktop:min-h-[4rem] font-spartan"
                       style={{
                         background: `${
                           element.currentNumber === activeState
@@ -146,10 +151,10 @@ export default function Planet(props: IProps) {
                 className="flex px-6 py-4 justify-between items-center w-full border border-white border-opacity-50 md:flex-col md:items-start md:gap-[0.6rem] md:py-4"
                 key={index}
               >
-                <p className="font-spartan text-[0.8rem] leading-[1.6rem] opacity-50 tracking-[0.7px] desktop:[1.1rem] desktop:leading-[2.5rem]">
+                <p className="font-spartan text-[0.8rem] leading-[1.6rem] opacity-50 tracking-[0.7px] desktop:text-[1.1rem] desktop:leading-[2.5rem]">
                   {element.name}
                 </p>
-                <p className="font-antonio text-[2rem] leading-[2.6rem] tracking-[-0.75px] md:text-[2.4rem] md:leading-[3.1rem] desktop:text-10 desktop:leading-[5.1rem]">
+                <p className="font-antonio text-[2rem] leading-[2.6rem] tracking-[-0.75px] md:text-[2.4rem] md:leading-[3.1rem] desktop:text-[4rem] desktop:leading-[5.1rem]">
                   {planet?.[element.info]}
                 </p>
               </div>

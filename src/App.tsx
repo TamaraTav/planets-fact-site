@@ -2,8 +2,6 @@ import Planet from "./components/Planet";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import data from "./data/data.json";
-
 import Header from "./components/Header";
 
 function App() {
@@ -13,18 +11,18 @@ function App() {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     setIsSmallScreen(mediaQuery.matches);
 
-    const handleScreenChange = (e: MediaQueryListEvent | MediaQueryList) => {
+    const handleScreenChange = (e: MediaQueryListEvent) => {
       setIsSmallScreen(e.matches);
     };
 
-    mediaQuery.addListener(handleScreenChange);
+    mediaQuery.addEventListener("change", handleScreenChange);
 
     return () => {
-      mediaQuery.removeListener(handleScreenChange);
+      mediaQuery.removeEventListener("change", handleScreenChange);
     };
   }, []);
   return (
-    <div className=" min-h-screen bg-[url('./background-stars.svg')] bg-space">
+    <div className="min-h-screen bg-[url('/assets/background-stars.svg')] bg-space">
       <Header isSmallScreen={isSmallScreen} />
 
       <Routes>
